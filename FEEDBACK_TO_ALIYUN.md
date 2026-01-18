@@ -1,11 +1,3 @@
-# 关于 ESA Pages 边缘函数执行时间限制的反馈建议
-
-## 反馈渠道
-
-1. **工单系统**: 登录阿里云控制台 > 工单 > 提交工单 > 选择"边缘安全加速 ESA"产品
-2. **产品反馈**: ESA 控制台右上角的"反馈"按钮
-3. **天池比赛讨论区**: 在比赛页面的讨论区发帖反馈
-4. **阿里云开发者社区**: https://developer.aliyun.com/
 
 ## 问题描述
 
@@ -149,7 +141,7 @@ const posts = await query('SELECT * FROM posts WHERE status = ?', ['published'])
 
 ## 联系方式
 
-- 姓名: [你的姓名]
+- 姓名: 
 - 账号 ID: 1932368571706785
 - 项目: ESA Blog Pro (参赛项目)
 - GitHub: https://github.com/nike022/uublog
