@@ -5,9 +5,9 @@
         <!-- Logo -->
         <NuxtLink to="/" class="flex items-center space-x-3">
           <div class="w-8 h-8 bg-gradient-to-r from-primary-500 to-accent-500 rounded-xl flex items-center justify-center shadow-lg">
-            <span class="text-white font-bold text-lg">V</span>
+            <span class="text-white font-bold text-lg">E</span>
           </div>
-          <span class="font-bold text-xl bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Vibe Coding</span>
+          <span class="font-bold text-xl bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">ESA Blog Pro</span>
         </NuxtLink>
 
         <!-- Desktop Navigation -->
@@ -26,12 +26,9 @@
         <!-- Right side buttons -->
         <div class="hidden md:flex items-center space-x-4">
           <ColorModeButton />
-          <button class="btn-secondary">
-            Log In
-          </button>
-          <button class="btn-primary">
-            Start Vibing
-          </button>
+          <NuxtLink to="/admin/login" class="btn-secondary">
+            登录
+          </NuxtLink>
         </div>
 
         <!-- Mobile menu button -->
@@ -69,12 +66,9 @@
               {{ item.name }}
             </NuxtLink>
             <div class="flex flex-col space-y-3 pt-4 border-t border-gray-200 dark:border-gray-700">
-              <button class="btn-secondary w-full">
-                Log In
-              </button>
-              <button class="btn-primary w-full">
-                Start Vibing
-              </button>
+              <NuxtLink to="/admin/login" class="btn-secondary w-full">
+                登录
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -89,9 +83,8 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 const mobileMenuOpen = ref(false)
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Features', href: '/features' },
-  { name: 'About', href: '/about' },
+  { name: '首页', href: '/' },
+  { name: '关于', href: '/about' },
 ]
 
 // Close mobile menu when route changes
