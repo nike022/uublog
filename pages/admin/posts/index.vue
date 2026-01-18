@@ -1,5 +1,16 @@
 <template>
   <div class="min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- 导航菜单 -->
+    <nav class="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="flex gap-6 py-4">
+          <NuxtLink to="/admin/posts" class="text-blue-600 dark:text-blue-400 font-medium">文章管理</NuxtLink>
+          <NuxtLink to="/admin/categories" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">分类管理</NuxtLink>
+          <NuxtLink to="/admin/tags" class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400">标签管理</NuxtLink>
+        </div>
+      </div>
+    </nav>
+
     <div class="max-w-7xl mx-auto px-4 py-8">
       <div class="flex justify-between items-center mb-8">
         <h1 class="text-3xl font-bold text-gray-900 dark:text-white">文章管理</h1>
@@ -36,7 +47,7 @@
             </tr>
           </thead>
           <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-            <tr v-for="post in data?.posts" :key="post.id" class="hover:bg-gray-50 dark:hover:bg-gray-700">
+            <tr v-for="post in data?.posts || []" :key="post.id" class="hover:bg-gray-50 dark:hover:bg-gray-700">
               <td class="px-6 py-4 text-gray-900 dark:text-white">{{ post.title }}</td>
               <td class="px-6 py-4">
                 <span
