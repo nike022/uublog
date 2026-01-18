@@ -44,6 +44,7 @@
         </table>
       </div>
     </div>
+    </div>
 
     <!-- 创建/编辑模态框 -->
     <div v-if="showCreateModal || showEditModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
