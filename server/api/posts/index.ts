@@ -24,7 +24,7 @@ export default defineEventHandler(async (event) => {
 
   // 创建文章 (演示版本返回成功)
   if (method === 'POST') {
-    const body = await readBody(event)
+    await readBody(event)
     return {
       id: mockPosts.length + 1,
       message: '文章创建成功 (演示模式)'
