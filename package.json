@@ -4,26 +4,33 @@
   "description": "ESA Blog Pro - 基于阿里云 ESA Pages 的现代化博客系统",
   "private": true,
   "scripts": {
-    "build": "nuxt generate",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "init-db": "node scripts/init-db.js"
+  },
+  "engines": {
+    "node": ">=20.0.0"
   },
   "devDependencies": {
+    "@headlessui/vue": "^1.7.22",
+    "@heroicons/vue": "^2.1.5",
     "@nuxt/devtools": "^1.0.8",
     "@nuxtjs/tailwindcss": "^6.12.0",
     "nuxt": "^3.12.4",
-    "typescript": "^5.5.4",
-    "@headlessui/vue": "^1.7.22",
-    "@heroicons/vue": "^2.1.5"
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "@nuxtjs/color-mode": "^3.4.2",
-    "vue": "^3.4.31",
-    "vue-router": "^4.4.0",
-    "mysql2": "^3.6.5",
-    "marked": "^11.1.1",
+    "bcryptjs": "^3.0.3",
+    "dayjs": "^1.11.10",
+    "dotenv": "^17.2.3",
     "highlight.js": "^11.9.0",
-    "dayjs": "^1.11.10"
+    "marked": "^11.1.1",
+    "mysql2": "^3.6.5",
+    "vditor": "^3.11.2",
+    "vue": "^3.4.31",
+    "vue-router": "^4.4.0"
   }
 }

@@ -8,20 +8,31 @@ export default defineEventHandler(async (event) => {
     const { page = 1, limit = 10, status = 'published' } = getQuery(event)
     const offset = (Number(page) - 1) * Number(limit)
 
+    let whereClause = 'WHERE p.status = ?'
+    let params: any[] = [status, Number(limit), offset]
+
+    if (status === 'all') {
+      whereClause = 'WHERE 1=1'
+      params = [Number(limit), offset]
+    }
+
     const posts = await query(
       `SELECT p.*, u.username as author_name, c.name as category_name
        FROM posts p
        LEFT JOIN users u ON p.author_id = u.id
        LEFT JOIN categories c ON p.category_id = c.id
-       WHERE p.status = ?
-       ORDER BY p.published_at DESC
+       ${whereClause}
+       ORDER BY p.created_at DESC
        LIMIT ? OFFSET ?`,
-      [status, Number(limit), offset]
+      params
     )
 
+    const countWhere = status === 'all' ? '' : 'WHERE status = ?'
+    const countParams = status === 'all' ? [] : [status]
+
     const [{ total }] = await query(
-      'SELECT COUNT(*) as total FROM posts WHERE status = ?',
-      [status]
+      `SELECT COUNT(*) as total FROM posts ${countWhere}`,
+      countParams
     ) as any
 
     return {
@@ -37,12 +48,14 @@ export default defineEventHandler(async (event) => {
   // 创建文章
   if (method === 'POST') {
     const body = await readBody(event)
-    const { title, slug, content, excerpt, category_id, author_id = 1 } = body
+    const { title, slug, content, excerpt, category_id, author_id = 1, status = 'draft' } = body
+
+    const publishedAt = status === 'published' ? new Date() : null
 
     const result = await query(
       `INSERT INTO posts (title, slug, content, excerpt, category_id, author_id, status, published_at)
-       VALUES (?, ?, ?, ?, ?, ?, 'published', NOW())`,
-      [title, slug, content, excerpt, category_id, author_id]
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [title, slug, content, excerpt, category_id, author_id, status, publishedAt]
     ) as any
 
     return {

@@ -1,5 +1,6 @@
 {
   "name": "esa-blog-pro",
+  "entry": "./.output/server/index.mjs",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "assets": {
