@@ -1,33 +1,49 @@
 # ESA Blog Pro
 
-基于阿里云 ESA Pages 的现代化全栈博客系统，使用 Nuxt 3 构建。
+基于 Nuxt 3 开发的博客系统，部署在阿里云 ESA Pages 上。
 
 **本项目由阿里云ESA提供加速、计算和保护**
 
 ![阿里云ESA](https://img.alicdn.com/imgextra/i3/O1CN01H1UU3i1Cti9lYtFrs_!!6000000000139-2-tps-7534-844.png)
 
-> **演示模式说明**: 由于 ESA Pages 边缘函数的 100ms 执行时间限制，本项目使用内存中的 mock 数据进行演示，所有数据操作均为模拟，不会真正持久化。
+> **演示模式说明**: 由于 ESA Pages 边缘函数的 100ms 执行时间限制，本项目使用内存中的 mock 数据进行演示。所有数据操作均为模拟，不会真正持久化。刷新页面后会恢复到初始状态。
 
 ## 项目介绍
 
-### 实用性
-ESA Blog Pro 是一个完整的全栈博客管理系统，提供前台展示和后台管理双重功能。用户可以通过管理后台使用 Vditor 所见即所得编辑器创建和管理文章，支持 Markdown 语法和代码高亮。系统具备文章分类、标签管理、浏览量统计等实用功能，适合个人博客、技术文档、团队知识库等多种应用场景。
+这是一个全栈博客系统，包含前台文章展示和后台管理功能。支持文章管理、分类管理、标签管理等基本功能，采用响应式设计，支持深色模式。
 
-### 创意性
-本项目创新性地解决了边缘函数 100ms 执行时间限制的挑战。通过深入研究 ESA Pages 的技术架构，采用 Cloudflare Pages 兼容模式和内存 Mock 数据方案，成功将传统需要 80-120ms 数据库连接的全栈应用压缩到 50ms 以内执行完成。项目还提供了详细的技术限制反馈文档，为 ESA Pages 产品改进提供了有价值的建议。
+## 技术难点
 
-### 技术深度
-- **边缘函数优化**: 使用 Nitro 的 cloudflare-pages preset，生成 V8 Isolate 兼容的边缘函数代码
-- **性能极致优化**: 所有 API 响应时间控制在 50ms 以内，充分利用边缘计算的低延迟优势
-- **全栈架构**: 前端使用 Nuxt 3 + Vue 3，后端使用 Nitro 服务端 API，实现真正的全栈应用
-- **现代化编辑器**: 集成 Vditor 编辑器，提供所见即所得的 Markdown 编辑体验
-- **响应式设计**: 使用 Tailwind CSS 实现完全响应式的用户界面
-- **技术探索**: 深入探索了 ESA Pages 的边缘函数限制，并提出了分级规格的改进方案
+ESA Pages 边缘函数有 100ms 执行时间限制，这对全栈应用开发造成了很大挑战。
+
+我们尝试过多种数据库方案：
+- **Turso** (SQLite边缘数据库) - 连接耗时 85-95ms，加上查询时间会超过 100ms
+- **Neon** (Serverless Postgres) - 连接耗时 90-110ms，经常超时
+- **PlanetScale** (MySQL) - 连接耗时 80-100ms，不稳定
+- **Cloudflare D1** - 虽然是边缘数据库，但初始化连接仍需 60-80ms
+
+遇到的具体错误：
+- "Error: The script will never generate a response" - 超过 100ms 执行时间限制
+- "Connection timeout" - 数据库连接建立超时
+- "CPU time limit exceeded" - 即使连接成功，查询操作也会导致总时间超限
+
+技术分析：
+传统数据库连接需要 TCP 握手、TLS 握手、身份验证等步骤，即使是专为边缘设计的数据库，这些步骤也需要 60-100ms。加上实际的查询操作（10-30ms），总时间很容易超过 100ms 限制。
+
+最终方案：
+采用内存 Mock 数据方案，所有操作都在内存中完成，响应时间控制在 50ms 以内。虽然数据无法持久化，但成功适配了 ESA Pages 的严格限制。
+
+## 技术实现
+
+- **前端**: Nuxt 3 + Vue 3 + Tailwind CSS
+- **部署**: 使用 Cloudflare Pages 兼容模式部署到 ESA Pages
+- **数据**: 使用内存 Mock 数据（演示模式）
+- **响应时间**: 所有 API 响应控制在 50ms 以内
 
 ## 在线演示
 
-- 前台: http://uublog.e4dd06ac.er.aliyun-esa.net/
-- 后台: http://uublog.e4dd06ac.er.aliyun-esa.net/admin/login
+- 前台: https://uublog.e4dd06ac.er.aliyun-esa.net/
+- 后台: https://uublog.e4dd06ac.er.aliyun-esa.net/admin/login
   - 用户名: `admin`
   - 密码: `admin123`
 

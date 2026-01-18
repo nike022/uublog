@@ -47,8 +47,8 @@ ESA Pages 边缘函数有 100ms 执行时间限制，这对全栈应用开发造
 由于使用 Mock 数据，所有的增删改操作都是演示性质的，不会真正保存。刷新页面后会恢复到初始状态。这是为了适配 ESA Pages 的技术限制。
 
 六、在线演示
-- 前台：http://uublog.e4dd06ac.er.aliyun-esa.net/
-- 后台：http://uublog.e4dd06ac.er.aliyun-esa.net/admin/login
+- 前台：https://uublog.e4dd06ac.er.aliyun-esa.net/
+- 后台：https://uublog.e4dd06ac.er.aliyun-esa.net/admin/login
   用户名：admin
   密码：admin123
 
