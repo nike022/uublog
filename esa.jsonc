@@ -1,0 +1,9 @@
+{
+  "name": "esa-blog-pro",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "assets": {
+    "directory": "./.output/public",
+    "notFoundStrategy": "singlePageApplication"
+  }
+}
