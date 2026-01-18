@@ -1,4 +1,4 @@
-import { query } from '~/server/utils/db'
+import { mockUser } from '~/server/utils/mockData'
 import bcrypt from 'bcryptjs'
 
 export default defineEventHandler(async (event) => {
@@ -11,19 +11,15 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const [user] = await query(
-    'SELECT * FROM users WHERE username = ?',
-    [username]
-  ) as any
-
-  if (!user) {
+  // 使用模拟用户数据
+  if (username !== mockUser.username) {
     throw createError({
       statusCode: 401,
       message: '用户名或密码错误'
     })
   }
 
-  const isValid = await bcrypt.compare(password, user.password)
+  const isValid = await bcrypt.compare(password, mockUser.password)
 
   if (!isValid) {
     throw createError({
@@ -33,9 +29,9 @@ export default defineEventHandler(async (event) => {
   }
 
   return {
-    id: user.id,
-    username: user.username,
-    email: user.email,
-    role: user.role
+    id: mockUser.id,
+    username: mockUser.username,
+    email: mockUser.email,
+    role: mockUser.role
   }
 })

@@ -1,6 +1,5 @@
-import { query } from '~/server/utils/db'
+import { mockCategories } from '~/server/utils/mockData'
 
 export default defineEventHandler(async () => {
-  const categories = await query('SELECT * FROM categories ORDER BY name')
-  return categories
+  return mockCategories
 })
