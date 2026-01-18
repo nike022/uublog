@@ -4,9 +4,9 @@
   "description": "ESA Blog Pro - 基于阿里云 ESA Pages 的现代化博客系统",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "preview": "nuxt preview",
+    "build": "node node_modules/nuxt/bin/nuxt.mjs build",
+    "dev": "node node_modules/nuxt/bin/nuxt.mjs dev",
+    "preview": "node node_modules/nuxt/bin/nuxt.mjs preview",
     "typecheck": "nuxt typecheck",
     "init-db": "node scripts/init-db.js"
   },
