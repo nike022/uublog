@@ -1,10 +1,10 @@
 {
   "name": "esa-blog-pro",
-  "entry": "./.output/server/index.mjs",
+  "entry": "./dist/_worker.js/index.js",
   "installCommand": "npm install",
   "buildCommand": "npm run build",
   "assets": {
-    "directory": "./.output/public",
+    "directory": "./dist",
     "notFoundStrategy": "singlePageApplication"
   }
 }
